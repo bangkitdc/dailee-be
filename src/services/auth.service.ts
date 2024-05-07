@@ -51,13 +51,19 @@ export class AuthService {
     email: string,
     username: string,
     password: string,
+    confirm_password: string
   ) {
+    const errors: Record<string, string[]> = {};
+
+    // Check confirm password
+    if (password !== confirm_password) {
+      errors.confirm_password = ["Confirm password doesn't match password"];
+    }
+
     const isUsernameExists = await this.userService.getUserByUsername(username);
     const isEmailExists = await this.userService.getUserByEmail(email);
 
     // Check uniqueness
-    const errors: Record<string, string[]> = {};
-
     if (isUsernameExists) {
       errors.username = ["Username already exists"];
     }
@@ -69,7 +75,7 @@ export class AuthService {
     if (Object.keys(errors).length > 0) {
       throw new HttpException(
         HttpStatusCode.Conflict, 
-        'Operation failed, please check your request again', 
+        'Invalid request', 
         errors
       );
     }

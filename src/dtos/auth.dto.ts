@@ -1,13 +1,16 @@
 import { z } from 'zod';
 
 const usernameRegex = /^\w{5,}$/;
-const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/;
 
 export const loginSchema = z.object({
   body: z.object({
     email: z
       .string({
         required_error: 'Email is required',
+      })
+      .min(1, {
+        message: 'Email is required',
       })
       .email({
         message: "Email format is invalid"
@@ -28,6 +31,9 @@ export const registerSchema = z.object({
     email: z
       .string({
         required_error: "Email is required"
+      })
+      .min(1, {
+        message: 'Email is required',
       })
       .email({
         message: "Email format is invalid"
@@ -51,7 +57,14 @@ export const registerSchema = z.object({
       }).min(1, {
         message: "Password is required"
       }).refine(value => passwordRegex.test(value), {
-        message: "Password must consist of a minimum of 8 characters, at least one letter, one number, and one special character"
+        message: "Password must consist of a minimum of 8 characters, at least one letter and one number"
       }),
+
+    confirm_password: z
+      .string({
+        required_error: "Confirm password is required"
+      }).min(1, {
+        message: "Confirm password is required"
+      })
   })
 });
