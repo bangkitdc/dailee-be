@@ -61,7 +61,7 @@ class ZodErrorMiddleware extends ErrorMiddleware {
     return ResponseHelper.responseError(
       jsonResponse,
       HttpStatusCode.UnprocessableEntity,
-      'Operation failed, please check your request again',
+      'Invalid request',
       errors,
     );
   }
@@ -108,7 +108,7 @@ class PrismaClientKnownRequestErrorMiddleware extends ErrorMiddleware {
           errors[constraintName].push(`${this.formatConstraintName(constraintName)} already exists`);
 
           code = HttpStatusCode.Conflict;
-          message = 'Operation failed, please check your request again';
+          message = 'Invalid request';
         }
         break;
       }
@@ -129,7 +129,7 @@ class PrismaClientKnownRequestErrorMiddleware extends ErrorMiddleware {
           }
 
           code = HttpStatusCode.Conflict;
-          message = 'Operation failed, please check your request again';
+          message = 'Invalid request';
         }
         break;
       }
