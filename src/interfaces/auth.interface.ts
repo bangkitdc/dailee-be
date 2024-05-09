@@ -8,5 +8,4 @@ export interface DataPayload extends JwtPayload {
 
 export interface RequestWithUser extends Request {
   user: User;
-  user_id: number;
 }

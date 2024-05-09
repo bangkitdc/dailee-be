@@ -1,5 +1,6 @@
 import { IApiBaseUserSelf } from '@interfaces/user.iterface';
 import { PrismaClient, User } from '@prisma/client';
+import { AssessmentResultService } from '@services/assessment.result.service';
 
 export class UserService {
   private userModel = new PrismaClient().user;
@@ -46,6 +47,13 @@ export class UserService {
       }
     });
 
-    return selfData;
+    const assessmentResultService = new AssessmentResultService();
+
+    return {
+      user_id: selfData.user_id,
+      username: selfData.username,
+      email: selfData.email,
+      already_test: await assessmentResultService.isUserHasTakenTest(selfData.user_id) != null
+    };
   }
 }

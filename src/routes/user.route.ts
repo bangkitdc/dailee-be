@@ -1,4 +1,3 @@
-// import { PositionId } from '@constants/position.type';
 import { UserController } from '@controllers/user.controller';
 import { Routes } from '@interfaces/route.interface';
 import { AuthMiddleware, ValidationMiddleware } from '@middlewares/index';
