@@ -57,7 +57,7 @@ export class AuthController {
     return ResponseHelper.responseSuccess(
       res,
       HttpStatusCode.Ok,
-      'Logout successfully'
+      'Logout successful'
     );
   }
 }

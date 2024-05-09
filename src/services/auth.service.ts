@@ -1,12 +1,14 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { compare, genSalt, hash } from 'bcryptjs';
 import { Response } from 'express';
-import { UserService } from './user.service';
 import { PrismaClient } from '@prisma/client';
 import { HttpException } from '@exceptions/http.exception';
 import { HttpStatusCode } from '@constants/http.enum';
 import { AuthHelper } from '@helpers/auth.helper';
 import { REFRESH_TOKEN_SECRET } from '@config';
+import { UserService } from '@services/user.service';
+import { TaskCategoryService } from '@services/task.category.service';
+import { AssessmentResultService } from '@services/assessment.result.service';
 
 export class AuthService {
   private userService = new UserService();
@@ -37,11 +39,14 @@ export class AuthService {
     // Make acess token
     const accessToken = AuthHelper.createAccessToken(user);
 
+    const assessmentResultService = new AssessmentResultService();
+
     return {
       user: {
         user_id: user.user_id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        already_test: await assessmentResultService.isUserHasTakenTest(user.user_id) != null
       },
       token: accessToken,
     };
@@ -81,13 +86,16 @@ export class AuthService {
     }
 
     const hashedPassword = await hash(password, await genSalt());
-    await this.userModel.create({
+    const newUser = await this.userModel.create({
       data: {
         email: email,
         username: username,
         password: hashedPassword
       },
     });
+
+    const taskCategoryService = new TaskCategoryService();
+    await taskCategoryService.createInitialTaskCategories(newUser.user_id);
 
     return;
   }
