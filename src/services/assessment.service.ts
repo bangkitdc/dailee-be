@@ -105,7 +105,7 @@ export class AssessmentService {
 
     // Update task categories priority
     const taskCategoryService = new TaskCategoryService();
-    taskCategoryService.updateTaskCategoriesByUserId(
+    taskCategoryService.createOrUpdateTaskCategoriesByUserId(
       user_id,
       task_categories
     );

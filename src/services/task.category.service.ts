@@ -1,5 +1,8 @@
+import { HttpStatusCode } from '@constants/http.enum';
+import { HttpException } from '@exceptions/http.exception';
 import { IApiBaseTaskCategory } from '@interfaces/task.category.interface';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, TaskCategory } from '@prisma/client';
+import { TaskCategoryUtils } from '@utils/task.category.utils';
 
 const createTaskCategorySeeds = (user_id: number) => {
   const taskCategorySeeds = [
@@ -11,7 +14,6 @@ const createTaskCategorySeeds = (user_id: number) => {
 
   return taskCategorySeeds;
 }
-
 export class TaskCategoryService {
   private taskCategoryModel = new PrismaClient().taskCategory;
 
@@ -38,27 +40,86 @@ export class TaskCategoryService {
     return categories;
   }
 
-  public async updateTaskCategoriesByUserId(user_id: number, categories: IApiBaseTaskCategory[]): Promise<IApiBaseTaskCategory[]> {
+  public async createOrUpdateTaskCategoriesByUserId(user_id: number, categories: IApiBaseTaskCategory[]): Promise<IApiBaseTaskCategory[]> {
     const updatedCategories: IApiBaseTaskCategory[] = [];
+    let errors: Record<string, string[]> = {};
+
+    // Validate first
+    for (const category of categories) {
+      if (category.task_category_id === -1) {
+        errors = await TaskCategoryUtils.validateAddTaskCategory(user_id, category.task_category_name, errors);
+      }
+    }
+
+    if (Object.keys(errors).length > 0) {
+      throw new HttpException(
+        HttpStatusCode.Conflict, 
+        'Invalid request', 
+        errors
+      );
+    }
     
     for (const [index, category] of categories.entries()) {
-      const updatedCategory = await this.taskCategoryModel.update({
-        where: {
-          user_id: user_id,
-          task_category_id: category.task_category_id
-        },
-        data: {
-          priority: index + 1
-        },
-        select: {
-          task_category_id: true,
-          task_category_name: true
-        }
-      });
+      if (category.task_category_id === -1) { // create
+        const newCategory = await this.taskCategoryModel.create({
+          data: {
+            user_id: user_id,
+            task_category_name: category.task_category_name,
+            priority: index + 1
+          }, 
+          select: {
+            task_category_id: true,
+            task_category_name: true
+          }
+        });
 
-      updatedCategories.push(updatedCategory);
+        updatedCategories.push(newCategory);
+      } else { // update
+        const updatedCategory = await this.taskCategoryModel.update({
+          where: {
+            user_id: user_id,
+            task_category_id: category.task_category_id
+          },
+          data: {
+            priority: index + 1
+          },
+          select: {
+            task_category_id: true,
+            task_category_name: true
+          }
+        });
+
+        updatedCategories.push(updatedCategory);
+      }
     }
 
     return updatedCategories;
+  }
+
+  public async validateAddTaskCategory(user_id: number, task_category_name: string): Promise<void> {
+    let errors: Record<string, string[]> = {};
+
+    errors = await TaskCategoryUtils.validateAddTaskCategory(user_id, task_category_name, errors);
+
+    if (Object.keys(errors).length > 0) {
+      throw new HttpException(
+        HttpStatusCode.Conflict, 
+        'Invalid request', 
+        errors
+      );
+    }
+
+    return;
+  }
+
+  public async getTaskCategory(user_id: number, task_category_name: string): Promise<TaskCategory> {
+    const category = await this.taskCategoryModel.findFirst({
+      where: {
+        user_id: user_id,
+        task_category_name: task_category_name
+      }
+    });
+
+    return category;
   }
 }

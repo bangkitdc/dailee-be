@@ -9,6 +9,7 @@ export class TaskCategoryController {
   constructor(private taskCategoryService: TaskCategoryService) {
     this.getTaskCategories = this.getTaskCategories.bind(this);
     this.updateTaskCategories = this.updateTaskCategories.bind(this);
+    this.validateAddTaskCategory = this.validateAddTaskCategory.bind(this);
   }
 
   public async getTaskCategories(req: RequestWithUser, res: Response) {
@@ -27,7 +28,7 @@ export class TaskCategoryController {
   public async updateTaskCategories(req: RequestWithUser, res: Response) {
     const taskCategories: IApiBaseTaskCategory[] = req.body;
 
-    const updatedCategories = await this.taskCategoryService.updateTaskCategoriesByUserId(
+    const updatedCategories = await this.taskCategoryService.createOrUpdateTaskCategoriesByUserId(
       req.user.user_id,
       taskCategories
     );
@@ -37,6 +38,21 @@ export class TaskCategoryController {
       HttpStatusCode.Ok, 
       'Task Categories updated successfully', 
       updatedCategories
+    );
+  }
+
+  public async validateAddTaskCategory(req: RequestWithUser, res: Response) {
+    const { task_category_name } = req.body;
+
+    await this.taskCategoryService.validateAddTaskCategory(
+      req.user.user_id,
+      task_category_name
+    );
+
+    return ResponseHelper.responseSuccess(
+      res, 
+      HttpStatusCode.Ok, 
+      'Validated',
     );
   }
 }
