@@ -8,7 +8,7 @@ import { Response } from 'express';
 export class TaskCategoryController {
   constructor(private taskCategoryService: TaskCategoryService) {
     this.getTaskCategories = this.getTaskCategories.bind(this);
-    this.updateTaskCategories = this.updateTaskCategories.bind(this);
+    this.addOrUpdateTaskCategories = this.addOrUpdateTaskCategories.bind(this);
     this.validateAddTaskCategory = this.validateAddTaskCategory.bind(this);
   }
 
@@ -25,7 +25,7 @@ export class TaskCategoryController {
     );
   }
 
-  public async updateTaskCategories(req: RequestWithUser, res: Response) {
+  public async addOrUpdateTaskCategories(req: RequestWithUser, res: Response) {
     const taskCategories: IApiBaseTaskCategory[] = req.body;
 
     const updatedCategories = await this.taskCategoryService.createOrUpdateTaskCategoriesByUserId(
