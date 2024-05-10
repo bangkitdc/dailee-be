@@ -4,6 +4,10 @@ import { AppRouter } from './routes';
 import { NODE_ENV, PORT, ORIGIN, CREDENTIALS, VERSION } from '@config';
 import cookieParser from 'cookie-parser';
 
+if (process.env.NODE_ENV === 'production') {
+  require('module-alias/register');
+}
+
 export class App {
   public app: express.Application;
   public env: string;
