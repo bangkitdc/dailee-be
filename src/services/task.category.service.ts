@@ -40,6 +40,19 @@ export class TaskCategoryService {
     return categories;
   }
 
+  public async getTaskCategoriesWithPriorityByUserId(user_id: number): Promise<TaskCategory[]> {
+    const categories = await this.taskCategoryModel.findMany({
+      where: { 
+        user_id: user_id 
+      },
+      orderBy: {
+        priority: "asc"
+      }
+    });
+
+    return categories;
+  }
+
   public async createOrUpdateTaskCategoriesByUserId(user_id: number, categories: IApiBaseTaskCategory[]): Promise<IApiBaseTaskCategory[]> {
     const updatedCategories: IApiBaseTaskCategory[] = [];
     let errors: Record<string, string[]> = {};

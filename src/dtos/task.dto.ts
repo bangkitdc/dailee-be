@@ -37,3 +37,22 @@ export const addOrUpdateTaskSchema = z.object({
       }),
   })
 });
+
+export const getTaskSchema = z.object({
+  params: z.object({
+    date: z
+      .coerce
+      .date()
+  }),
+});
+
+export const checkTaskSchema = z.object({
+  params: z.object({
+    task_id: z
+      .coerce
+      .number({
+        required_error: "Task id is required"
+      })
+      .positive()
+  }),
+});
