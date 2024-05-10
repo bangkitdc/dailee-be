@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon",
+    "start": "node src/server.ts",
     "prisma:init": "prisma init",
     "prisma:migrate": "prisma migrate dev --preview-feature",
     "prisma:generate": "prisma generate",
