@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN_EXPIRATION, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from '@config';
+import { ACCESS_TOKEN_EXPIRATION, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_EXPIRATION, REFRESH_TOKEN_SECRET } from 'config';
 import { User } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 import { Response } from 'express';

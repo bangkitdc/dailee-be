@@ -1,9 +1,9 @@
-import { IApiBaseTask } from '@interfaces/task.interface';
 import { PrismaClient, Task } from '@prisma/client';
-import { TaskUtils } from '@utils/task.utils';
 import { TaskCategoryService } from './task.category.service';
 import { AssessmentResultService } from './assessment.result.service';
 import { RecommendationService } from './recommendation.service';
+import { IApiBaseTask } from 'interfaces/task.interface';
+import { TaskUtils } from 'utils/task.utils';
 
 export class TaskService {
   private taskModel = new PrismaClient().task;

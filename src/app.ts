@@ -18,7 +18,7 @@ addAliases({
 import express from 'express';
 import cors from 'cors';
 import { AppRouter } from './routes';
-import { NODE_ENV, PORT, ORIGIN, CREDENTIALS, VERSION } from '@config';
+import { NODE_ENV, PORT, ORIGIN, CREDENTIALS, VERSION } from './config';
 import cookieParser from 'cookie-parser';
 
 export class App {

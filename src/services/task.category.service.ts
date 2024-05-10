@@ -1,8 +1,8 @@
-import { HttpStatusCode } from '@constants/http.enum';
-import { HttpException } from '@exceptions/http.exception';
-import { IApiBaseTaskCategory } from '@interfaces/task.category.interface';
-import { PrismaClient, TaskCategory } from '@prisma/client';
-import { TaskCategoryUtils } from '@utils/task.category.utils';
+import { PrismaClient, TaskCategory } from "@prisma/client";
+import { HttpStatusCode } from "constants/http.enum";
+import { HttpException } from "exceptions/http.exception";
+import { IApiBaseTaskCategory } from "interfaces/task.category.interface";
+import { TaskCategoryUtils } from "utils/task.category.utils";
 
 const createTaskCategorySeeds = (user_id: number) => {
   const taskCategorySeeds = [

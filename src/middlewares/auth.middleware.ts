@@ -1,11 +1,11 @@
 import { NextFunction, Response } from 'express';
 import { ErrorMiddleware } from '.';
 import { HttpException } from 'exceptions/http.exception';
-import { ACCESS_TOKEN_SECRET } from '@config';
-import { HttpStatusCode } from '@constants/http.enum';
-import { DataPayload, RequestWithUser } from '@interfaces/auth.interface';
-import { UserService } from '@services/user.service';
 import jwt from 'jsonwebtoken';
+import { DataPayload, RequestWithUser } from 'interfaces/auth.interface';
+import { HttpStatusCode } from 'constants/http.enum';
+import { ACCESS_TOKEN_SECRET } from 'config';
+import { UserService } from 'services/user.service';
 
 class AuthMiddleware {
   public static async authenticateToken(req: RequestWithUser, res: Response, next: NextFunction) {
