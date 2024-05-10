@@ -5,18 +5,16 @@ const tslib_1 = require("tslib");
 const jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = require("bcryptjs");
 const client_1 = require("@prisma/client");
-const http_exception_1 = require("@exceptions/http.exception");
-const http_enum_1 = require("@constants/http.enum");
-const auth_helper_1 = require("@helpers/auth.helper");
-const _config_1 = require("@config");
-const user_service_1 = require("@services/user.service");
-const task_category_service_1 = require("@services/task.category.service");
-const assessment_result_service_1 = require("@services/assessment.result.service");
+const http_exception_1 = require("../exceptions/http.exception");
+const http_enum_1 = require("../constants/http.enum");
+const auth_helper_1 = require("../helpers/auth.helper");
+const _config_1 = require("../config");
+const user_service_1 = require("./user.service");
+const task_category_service_1 = require("./task.category.service");
+const assessment_result_service_1 = require("./assessment.result.service");
 class AuthService {
-    constructor() {
-        this.userService = new user_service_1.UserService();
-        this.userModel = new client_1.PrismaClient().user;
-    }
+    userService = new user_service_1.UserService();
+    userModel = new client_1.PrismaClient().user;
     async login(res, email, password) {
         const user = await this.userService.getUserByEmail(email);
         // Check user

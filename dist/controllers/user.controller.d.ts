@@ -1,5 +1,5 @@
-import { RequestWithUser } from '@interfaces/auth.interface';
-import { UserService } from '@services/user.service';
+import { RequestWithUser } from '../interfaces/auth.interface';
+import { UserService } from '../services/user.service';
 import { Response } from 'express';
 export declare class UserController {
     private userService;

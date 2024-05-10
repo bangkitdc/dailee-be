@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskCategoryController = void 0;
-const http_enum_1 = require("@constants/http.enum");
-const response_helper_1 = require("@helpers/response.helper");
+const http_enum_1 = require("../constants/http.enum");
+const response_helper_1 = require("../helpers/response.helper");
 class TaskCategoryController {
+    taskCategoryService;
     constructor(taskCategoryService) {
         this.taskCategoryService = taskCategoryService;
         this.getTaskCategories = this.getTaskCategories.bind(this);

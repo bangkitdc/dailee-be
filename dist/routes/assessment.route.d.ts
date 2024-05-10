@@ -1,4 +1,4 @@
-import { Routes } from '@interfaces/route.interface';
+import { Routes } from '../interfaces/route.interface';
 export declare class AssessmentRoute implements Routes {
     router: import("express-serve-static-core").Router;
     private assessmentService;

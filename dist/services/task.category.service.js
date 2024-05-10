@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskCategoryService = void 0;
-const http_enum_1 = require("@constants/http.enum");
-const http_exception_1 = require("@exceptions/http.exception");
+const http_enum_1 = require("../constants/http.enum");
+const http_exception_1 = require("../exceptions/http.exception");
 const client_1 = require("@prisma/client");
-const task_category_utils_1 = require("@utils/task.category.utils");
+const task_category_utils_1 = require("../utils/task.category.utils");
 const createTaskCategorySeeds = (user_id) => {
     const taskCategorySeeds = [
         { task_category_name: 'Document', user_id: user_id, priority: 1 },
@@ -15,9 +15,7 @@ const createTaskCategorySeeds = (user_id) => {
     return taskCategorySeeds;
 };
 class TaskCategoryService {
-    constructor() {
-        this.taskCategoryModel = new client_1.PrismaClient().taskCategory;
-    }
+    taskCategoryModel = new client_1.PrismaClient().taskCategory;
     async createInitialTaskCategories(user_id) {
         await this.taskCategoryModel.createMany({
             data: createTaskCategorySeeds(user_id)
@@ -100,7 +98,7 @@ class TaskCategoryService {
             };
             const updatedCategory = await this.taskCategoryModel.upsert({
                 where: { task_category_id: category.task_category_id },
-                create: Object.assign({}, categoryData),
+                create: { ...categoryData },
                 update: { priority: index + 1 },
                 select: {
                     task_category_id: true,

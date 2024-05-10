@@ -1,5 +1,5 @@
-import { RequestWithUser } from '@interfaces/auth.interface';
-import { TaskCategoryService } from '@services/task.category.service';
+import { RequestWithUser } from '../interfaces/auth.interface';
+import { TaskCategoryService } from '../services/task.category.service';
 import { Response } from 'express';
 export declare class TaskCategoryController {
     private taskCategoryService;

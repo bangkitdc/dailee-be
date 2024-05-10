@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AssessmentRoute = void 0;
-const assessment_controller_1 = require("@controllers/assessment.controller");
-const assessment_dto_1 = require("@dtos/assessment.dto");
-const index_1 = require("@middlewares/index");
-const assessment_service_1 = require("@services/assessment.service");
+const assessment_controller_1 = require("../controllers/assessment.controller");
+const assessment_dto_1 = require("../dtos/assessment.dto");
+const index_1 = require("../middlewares/index");
+const assessment_service_1 = require("../services/assessment.service");
 const express_1 = require("express");
 class AssessmentRoute {
+    router = (0, express_1.Router)();
+    assessmentService = new assessment_service_1.AssessmentService();
+    assessmentController = new assessment_controller_1.AssessmentController(this.assessmentService);
     constructor() {
-        this.router = (0, express_1.Router)();
-        this.assessmentService = new assessment_service_1.AssessmentService();
-        this.assessmentController = new assessment_controller_1.AssessmentController(this.assessmentService);
         this.initializeRoutes();
     }
     initializeRoutes() {

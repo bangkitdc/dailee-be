@@ -1,4 +1,4 @@
-import { IApiBaseRecommendation } from '@interfaces/recommendation.interface';
+import { IApiBaseRecommendation } from '../interfaces/recommendation.interface';
 export declare class RecommendationService {
     private prisma;
     private recommendationModel;

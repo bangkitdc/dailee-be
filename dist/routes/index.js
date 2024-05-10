@@ -2,12 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppRouter = void 0;
 const express_1 = require("express");
-const auth_route_1 = require("@routes/auth.route");
-const user_route_1 = require("@routes/user.route");
-const assessment_route_1 = require("@routes/assessment.route");
-const task_category_route_1 = require("@routes/task.category.route");
-const task_route_1 = require("@routes/task.route");
+const auth_route_1 = require("./auth.route");
+const user_route_1 = require("./user.route");
+const assessment_route_1 = require("./assessment.route");
+const task_category_route_1 = require("./task.category.route");
+const task_route_1 = require("./task.route");
 class AppRouter {
+    router;
     constructor() {
         this.router = (0, express_1.Router)();
         this.router.use(new auth_route_1.AuthRoute().router);

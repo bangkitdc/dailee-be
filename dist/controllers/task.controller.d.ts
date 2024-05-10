@@ -1,5 +1,5 @@
-import { RequestWithUser } from '@interfaces/auth.interface';
-import { TaskService } from '@services/task.service';
+import { RequestWithUser } from '../interfaces/auth.interface';
+import { TaskService } from '../services/task.service';
 import { Response } from 'express';
 export declare class TaskController {
     private taskService;

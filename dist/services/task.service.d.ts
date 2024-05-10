@@ -1,4 +1,4 @@
-import { IApiBaseTask } from '@interfaces/task.interface';
+import { IApiBaseTask } from '../interfaces/task.interface';
 import { Task } from '@prisma/client';
 export declare class TaskService {
     private taskModel;
