@@ -1,5 +1,5 @@
 import { TaskCategoryController } from '@controllers/task.category.controller';
-import { updateTaskCategoriesSchema, validateAddTaskCategorySchema } from '@dtos/task.category.dto';
+import { addOrUpdateTaskCategoriesSchema, validateAddTaskCategorySchema } from '@dtos/task.category.dto';
 import { Routes } from '@interfaces/route.interface';
 import { AuthMiddleware, ValidationMiddleware } from '@middlewares/index';
 import { TaskCategoryService } from '@services/task.category.service';
@@ -24,8 +24,8 @@ export class TaskCategoryRoute implements Routes {
     this.router.put(
       '/',
       AuthMiddleware.authenticateToken,
-      ValidationMiddleware.validate(updateTaskCategoriesSchema),
-      ValidationMiddleware.exceptionGuard(this.taskCategoryController.updateTaskCategories)
+      ValidationMiddleware.validate(addOrUpdateTaskCategoriesSchema),
+      ValidationMiddleware.exceptionGuard(this.taskCategoryController.addOrUpdateTaskCategories)
     );
 
     this.router.post(

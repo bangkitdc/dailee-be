@@ -59,38 +59,58 @@ export class TaskCategoryService {
       );
     }
     
+    // for (const [index, category] of categories.entries()) {
+    //   if (category.task_category_id === -1) { // create
+    //     const newCategory = await this.taskCategoryModel.create({
+    //       data: {
+    //         user_id: user_id,
+    //         task_category_name: category.task_category_name,
+    //         priority: index + 1
+    //       }, 
+    //       select: {
+    //         task_category_id: true,
+    //         task_category_name: true
+    //       }
+    //     });
+
+    //     updatedCategories.push(newCategory);
+    //   } else { // update
+    //     const updatedCategory = await this.taskCategoryModel.update({
+    //       where: {
+    //         user_id: user_id,
+    //         task_category_id: category.task_category_id
+    //       },
+    //       data: {
+    //         priority: index + 1
+    //       },
+    //       select: {
+    //         task_category_id: true,
+    //         task_category_name: true
+    //       }
+    //     });
+
+    //     updatedCategories.push(updatedCategory);
+    //   }
+    // }
+
     for (const [index, category] of categories.entries()) {
-      if (category.task_category_id === -1) { // create
-        const newCategory = await this.taskCategoryModel.create({
-          data: {
-            user_id: user_id,
-            task_category_name: category.task_category_name,
-            priority: index + 1
-          }, 
-          select: {
+      const categoryData = {
+        user_id: user_id,
+        task_category_name: category.task_category_name,
+        priority: index + 1
+      };
+
+      const updatedCategory = await this.taskCategoryModel.upsert({
+        where: { task_category_id: category.task_category_id },
+        create: { ...categoryData },
+        update: { priority: index + 1 },
+        select: {
             task_category_id: true,
             task_category_name: true
-          }
-        });
+        }
+      });
 
-        updatedCategories.push(newCategory);
-      } else { // update
-        const updatedCategory = await this.taskCategoryModel.update({
-          where: {
-            user_id: user_id,
-            task_category_id: category.task_category_id
-          },
-          data: {
-            priority: index + 1
-          },
-          select: {
-            task_category_id: true,
-            task_category_name: true
-          }
-        });
-
-        updatedCategories.push(updatedCategory);
-      }
+      updatedCategories.push(updatedCategory);
     }
 
     return updatedCategories;

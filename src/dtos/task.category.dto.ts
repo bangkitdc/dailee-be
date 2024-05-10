@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const updateTaskCategoriesSchema = z.object({
+export const addOrUpdateTaskCategoriesSchema = z.object({
   body: z.array(
     z.object({
       task_category_id: z
