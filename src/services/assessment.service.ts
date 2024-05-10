@@ -8,9 +8,10 @@ import { AssessmentResultService } from './assessment.result.service';
 import { TaskCategoryService } from './task.category.service';
 
 export class AssessmentService {
-  private assessmentResultModel = new PrismaClient().assessmentResult;
-  private questionModel = new PrismaClient().question;
-  private answerModel = new PrismaClient().answer;
+  private prisma = new PrismaClient();
+  private assessmentResultModel = this.prisma.assessmentResult;
+  private questionModel = this.prisma.question;
+  private answerModel = this.prisma.answer;
 
   public async getAssessmentQuestions(user_id: number): Promise<IApiBaseQuestion[]> {
     let questions: IApiBaseQuestion[] = [];
@@ -47,8 +48,7 @@ export class AssessmentService {
     const categories = await categoryService.getCategories();
 
     for (const category of categories) {
-      const prisma = new PrismaClient();
-      const questionsForCategory: IApiBaseQuestion[] = await prisma.$queryRaw`
+      const questionsForCategory: IApiBaseQuestion[] = await this.prisma.$queryRaw`
         SELECT "Question"."question_id",
               "Question"."category_id",
               "Question"."question",

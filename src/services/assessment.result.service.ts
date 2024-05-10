@@ -31,4 +31,36 @@ export class AssessmentResultService {
       },
     });
   }
+
+  public async getUserAssessmentResults(user_id: number): Promise<AssessmentResult[]> {
+    const assessmentResult = await this.assessmentResultModel.findMany({
+      where: {
+        user_id: user_id,
+        NOT: {
+          category_id: 1
+        }
+      },
+      orderBy: {
+        total_points: 'asc'
+      }
+    });
+
+    return assessmentResult;
+  }
+
+  public async getUserGoalAnswer(user_id: number): Promise<AssessmentResult> {
+    // 0: depression
+    // 1: anxiety
+    // 2: burnout
+    // 3: stress
+    // 4: no goal
+    const assessmentResult = await this.assessmentResultModel.findFirst({
+      where: {
+        user_id: user_id,
+        category_id: 1 // General
+      }
+    });
+
+    return assessmentResult;
+  }
 }
