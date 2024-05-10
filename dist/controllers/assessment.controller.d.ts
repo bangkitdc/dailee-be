@@ -1,6 +1,6 @@
+import { Response } from 'express';
 import { RequestWithUser } from '../interfaces/auth.interface';
 import { AssessmentService } from '../services/assessment.service';
-import { Response } from 'express';
 export declare class AssessmentController {
     private assessmentService;
     constructor(assessmentService: AssessmentService);

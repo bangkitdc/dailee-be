@@ -1,9 +1,9 @@
 
-import { HttpStatusCode } from 'constants/http.enum';
 import { Response } from 'express';
-import { ResponseHelper } from 'helpers';
-import { RequestWithUser } from 'interfaces/auth.interface';
-import { UserService } from 'services/user.service';
+import { ResponseHelper } from '../helpers';
+import { RequestWithUser } from '../interfaces/auth.interface';
+import { UserService } from '../services/user.service';
+import { HttpStatusCode } from '../constants/http.enum';
 
 export class UserController {
   constructor(private userService: UserService) {

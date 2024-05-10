@@ -2,11 +2,11 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import { AssessmentResultService } from './assessment.result.service';
 import { TaskCategoryService } from './task.category.service';
-import { IApiBaseAssessmentTest, IApiBaseQuestion } from 'interfaces/assessment.interface';
+import { IApiBaseAssessmentTest, IApiBaseQuestion } from '../interfaces/assessment.interface';
 import { CategoryService } from './category.service';
-import { IApiBaseTaskCategory } from 'interfaces/task.category.interface';
-import { HttpException } from 'exceptions/http.exception';
-import { HttpStatusCode } from 'constants/http.enum';
+import { IApiBaseTaskCategory } from '../interfaces/task.category.interface';
+import { HttpException } from '../exceptions/http.exception';
+import { HttpStatusCode } from '../constants/http.enum';
 
 export class AssessmentService {
   private prisma = new PrismaClient();

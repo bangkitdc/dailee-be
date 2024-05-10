@@ -1,6 +1,6 @@
+import { Response } from 'express';
 import { RequestWithUser } from '../interfaces/auth.interface';
 import { TaskService } from '../services/task.service';
-import { Response } from 'express';
 export declare class TaskController {
     private taskService;
     constructor(taskService: TaskService);

@@ -1,5 +1,5 @@
 import { PrismaClient, User } from '@prisma/client';
-import { IApiBaseUserSelf } from 'interfaces/user.iterface';
+import { IApiBaseUserSelf } from '../interfaces/user.iterface';
 import { AssessmentResultService } from './assessment.result.service';
 
 export class UserService {

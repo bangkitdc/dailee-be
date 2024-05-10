@@ -1,12 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
-const http_enum_1 = require("../constants/http.enum");
 const library_1 = require("@prisma/client/runtime/library");
-const response_helper_1 = require("../helpers/response.helper");
 const http_exception_1 = require("../exceptions/http.exception");
+const helpers_1 = require("../helpers");
+const http_enum_1 = require("../constants/http.enum");
 class ErrorMiddleware {
-    nextHandler;
     setNextHandler(nextHandler) {
         this.nextHandler = nextHandler;
         return this;
@@ -19,7 +18,7 @@ class ErrorMiddleware {
             return this.nextHandler.handle(res, error);
         }
         else {
-            return response_helper_1.ResponseHelper.responseError(res, http_enum_1.HttpStatusCode.InternalServerError, 'Internal server error', error);
+            return helpers_1.ResponseHelper.responseError(res, http_enum_1.HttpStatusCode.InternalServerError, 'Internal server error', error);
         }
     }
 }
@@ -28,7 +27,7 @@ class HttpErrorMiddleware extends ErrorMiddleware {
         return error instanceof http_exception_1.HttpException;
     }
     getResponse(jsonResponse, error) {
-        return response_helper_1.ResponseHelper.responseError(jsonResponse, error.statusCode, error.message, error.errors);
+        return helpers_1.ResponseHelper.responseError(jsonResponse, error.statusCode, error.message, error.errors);
     }
 }
 class ZodErrorMiddleware extends ErrorMiddleware {
@@ -45,7 +44,7 @@ class ZodErrorMiddleware extends ErrorMiddleware {
             }
             errors[fieldName].push(errorMessage);
         });
-        return response_helper_1.ResponseHelper.responseError(jsonResponse, http_enum_1.HttpStatusCode.UnprocessableEntity, 'Invalid request', errors);
+        return helpers_1.ResponseHelper.responseError(jsonResponse, http_enum_1.HttpStatusCode.UnprocessableEntity, 'Invalid request', errors);
     }
 }
 class PrismaClientKnownRequestErrorMiddleware extends ErrorMiddleware {
@@ -111,7 +110,7 @@ class PrismaClientKnownRequestErrorMiddleware extends ErrorMiddleware {
         if (Object.keys(errors).length === 0) {
             errors = null;
         }
-        return response_helper_1.ResponseHelper.responseError(jsonResponse, code, message, errors);
+        return helpers_1.ResponseHelper.responseError(jsonResponse, code, message, errors);
     }
 }
 class PrismaClientUnknownRequestErrorMiddleware extends ErrorMiddleware {
@@ -120,7 +119,7 @@ class PrismaClientUnknownRequestErrorMiddleware extends ErrorMiddleware {
         return error instanceof library_1.PrismaClientUnknownRequestError;
     }
     getResponse(jsonResponse, error) {
-        return response_helper_1.ResponseHelper.responseError(jsonResponse, http_enum_1.HttpStatusCode.InternalServerError, error.message, error);
+        return helpers_1.ResponseHelper.responseError(jsonResponse, http_enum_1.HttpStatusCode.InternalServerError, error.message, error);
     }
 }
 exports.default = new HttpErrorMiddleware().setNextHandler(new ZodErrorMiddleware().setNextHandler(new PrismaClientKnownRequestErrorMiddleware().setNextHandler(new PrismaClientUnknownRequestErrorMiddleware())));

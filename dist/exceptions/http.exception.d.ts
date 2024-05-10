@@ -1,4 +1,4 @@
-import { HttpStatusCode } from '../constants/http.enum';
+import { HttpStatusCode } from "../constants/http.enum";
 export declare class HttpException extends Error {
     statusCode: HttpStatusCode;
     errors: object | null | undefined;

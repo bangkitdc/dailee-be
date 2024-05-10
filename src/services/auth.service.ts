@@ -3,12 +3,12 @@ import { compare, genSalt, hash } from 'bcryptjs';
 import { Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { UserService } from './user.service';
-import { HttpException } from 'exceptions/http.exception';
-import { HttpStatusCode } from 'constants/http.enum';
-import { AuthHelper } from 'helpers';
+import { HttpException } from '../exceptions/http.exception';
+import { HttpStatusCode } from '../constants/http.enum';
+import { AuthHelper } from '../helpers';
 import { AssessmentResultService } from './assessment.result.service';
 import { TaskCategoryService } from './task.category.service';
-import { REFRESH_TOKEN_SECRET } from 'config';
+import { REFRESH_TOKEN_SECRET } from '../config';
 
 export class AuthService {
   private userService = new UserService();

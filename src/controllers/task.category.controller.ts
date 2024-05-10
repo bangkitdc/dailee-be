@@ -1,9 +1,9 @@
-import { HttpStatusCode } from 'constants/http.enum';
 import { Response } from 'express';
-import { ResponseHelper } from 'helpers';
-import { RequestWithUser } from 'interfaces/auth.interface';
-import { IApiBaseTaskCategory } from 'interfaces/task.category.interface';
-import { TaskCategoryService } from 'services/task.category.service';
+import { ResponseHelper } from '../helpers';
+import { RequestWithUser } from '../interfaces/auth.interface';
+import { IApiBaseTaskCategory } from '../interfaces/task.category.interface';
+import { TaskCategoryService } from '../services/task.category.service';
+import { HttpStatusCode } from '../constants/http.enum';
 
 export class TaskCategoryController {
   constructor(private taskCategoryService: TaskCategoryService) {

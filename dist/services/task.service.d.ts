@@ -1,5 +1,5 @@
-import { IApiBaseTask } from '../interfaces/task.interface';
 import { Task } from '@prisma/client';
+import { IApiBaseTask } from '../interfaces/task.interface';
 export declare class TaskService {
     private taskModel;
     getTaskById(task_id: number): Promise<Task>;

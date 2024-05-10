@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoryService = void 0;
 const client_1 = require("@prisma/client");
 class CategoryService {
-    categoryModel = new client_1.PrismaClient().category;
+    constructor() {
+        this.categoryModel = new client_1.PrismaClient().category;
+    }
     async getCategories() {
         const category = await this.categoryModel.findMany({
             where: {

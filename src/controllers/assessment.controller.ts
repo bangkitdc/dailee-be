@@ -1,8 +1,8 @@
-import { HttpStatusCode } from 'constants/http.enum';
 import { Response } from 'express';
-import { ResponseHelper } from 'helpers';
-import { RequestWithUser } from 'interfaces/auth.interface';
-import { AssessmentService } from 'services/assessment.service';
+import { ResponseHelper } from '../helpers';
+import { RequestWithUser } from '../interfaces/auth.interface';
+import { AssessmentService } from '../services/assessment.service';
+import { HttpStatusCode } from '../constants/http.enum';
 
 export class AssessmentController {
   constructor(private assessmentService: AssessmentService) {

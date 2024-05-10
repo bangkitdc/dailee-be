@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon",
+    "dev": "cross-env nodemon",
     "start": "node dist/server.js",
     "prisma:init": "prisma init",
     "prisma:migrate": "prisma migrate dev --preview-feature",
@@ -12,8 +12,8 @@
     "prisma:seed": "ts-node prisma/seed.ts",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "format": "prettier --write src/",
-    "build": "npx tsc && tsc-alias",
-    "vercel-build": "npm run build && prisma generate"
+    "build": "echo \"Building project\" && npx prisma generate && npx tsc",
+    "vercel-build": "npm run build && prisma generate && prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
@@ -51,19 +51,5 @@
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.9.3",
     "typescript": "^5.4.5"
-  },
-  "_moduleAliases": {
-    "@": "./dist",
-    "@config": "./dist/config",
-    "@constants/*": "./dist/constants",
-    "@controllers/*": "./dist/controllers",
-    "@dtos/*": "./dist/dtos",
-    "@exceptions/*": "./dist/exceptions",
-    "@helpers/*": "./dist/helpers",
-    "@interfaces/*": "./dist/interfaces",
-    "@middlewares/*": "./dist/middlewares",
-    "@routes/*": "./dist/routes",
-    "@services/*": "./dist/services",
-    "@utils/*": "./dist/utils"
   }
 }

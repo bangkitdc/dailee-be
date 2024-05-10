@@ -1,6 +1,6 @@
-import { HttpStatusCode } from 'constants/http.enum';
+import { HttpStatusCode } from '../constants/http.enum';
 import { Response } from 'express';
-import { IApiBaseResponseError, IApiBaseResponseSuccess } from 'interfaces/http.interface';
+import { IApiBaseResponseError, IApiBaseResponseSuccess } from '../interfaces/http.interface';
 
 export class ResponseHelper {
   public static responseSuccess(res: Response, statusCode: HttpStatusCode, message: string, data?: object[] | object | null | undefined) {
