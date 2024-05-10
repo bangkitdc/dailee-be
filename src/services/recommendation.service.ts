@@ -1,5 +1,5 @@
-import { IApiBaseRecommendation } from '@interfaces/recommendation.interface';
 import { PrismaClient } from '@prisma/client';
+import { IApiBaseRecommendation } from 'interfaces/recommendation.interface';
 
 export class RecommendationService {
   private prisma = new PrismaClient();

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { AuthRoute } from '@routes/auth.route';
-import { UserRoute } from '@routes/user.route';
-import { AssessmentRoute } from '@routes/assessment.route';
-import { TaskCategoryRoute } from '@routes/task.category.route';
-import { TaskRoute } from '@routes/task.route';
+import { AuthRoute } from './auth.route';
+import { UserRoute } from './user.route';
+import { AssessmentRoute } from './assessment.route';
+import { TaskCategoryRoute } from './task.category.route';
+import { TaskRoute } from './task.route';
 
 export class AppRouter {
   public router: Router;

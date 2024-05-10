@@ -1,6 +1,6 @@
-import { IApiBaseUserSelf } from '@interfaces/user.iterface';
 import { PrismaClient, User } from '@prisma/client';
-import { AssessmentResultService } from '@services/assessment.result.service';
+import { IApiBaseUserSelf } from 'interfaces/user.iterface';
+import { AssessmentResultService } from './assessment.result.service';
 
 export class UserService {
   private userModel = new PrismaClient().user;

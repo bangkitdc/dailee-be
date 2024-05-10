@@ -1,9 +1,9 @@
-import { AssessmentController } from '@controllers/assessment.controller';
-import { submitAssessmentTestSchema } from '@dtos/assessment.dto';
-import { Routes } from '@interfaces/route.interface';
-import { AuthMiddleware, ValidationMiddleware } from '@middlewares/index';
-import { AssessmentService } from '@services/assessment.service';
+import { AssessmentController } from 'controllers/assessment.controller';
+import { submitAssessmentTestSchema } from 'dtos/assessment.dto';
 import { Router } from 'express';
+import { Routes } from 'interfaces/route.interface';
+import { AuthMiddleware, ValidationMiddleware } from 'middlewares';
+import { AssessmentService } from 'services/assessment.service';
 
 export class AssessmentRoute implements Routes {
   public router = Router();

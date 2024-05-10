@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { AnyZodObject } from 'zod';
-import { IRequestResponseHandler } from '@interfaces/http.interface';
 import { ErrorMiddleware } from '.';
+import { IRequestResponseHandler } from 'interfaces/http.interface';
 
 class ValidationMiddleware {
   public static validate(schema: AnyZodObject | any) {
