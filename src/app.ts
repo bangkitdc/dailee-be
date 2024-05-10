@@ -1,12 +1,25 @@
+import 'module-alias/register';
+import { addAliases } from 'module-alias';
+addAliases({
+  "@": `${__dirname}/dist`,
+  "@config": `${__dirname}/dist/config`,
+  "@constants/*": `${__dirname}/dist/constants`,
+  "@controllers/*": `${__dirname}/dist/controllers`,
+  "@dtos/*": `${__dirname}/dist/dtos`,
+  "@exceptions/*": `${__dirname}/dist/exceptions`,
+  "@helpers/*": `${__dirname}/dist/helpers`,
+  "@interfaces/*": `${__dirname}/dist/interfaces`,
+  "@middlewares/*": `${__dirname}/dist/middlewares`,
+  "@routes/*": `${__dirname}/dist/routes`,
+  "@services/*": `${__dirname}/dist/services`,
+  "@utils/*": `${__dirname}/dist/utils`
+});
+
 import express from 'express';
 import cors from 'cors';
 import { AppRouter } from './routes';
 import { NODE_ENV, PORT, ORIGIN, CREDENTIALS, VERSION } from '@config';
 import cookieParser from 'cookie-parser';
-
-if (process.env.NODE_ENV === 'production') {
-  require('module-alias/register');
-}
 
 export class App {
   public app: express.Application;
