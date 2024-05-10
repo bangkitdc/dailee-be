@@ -1,7 +1,7 @@
-import { HttpStatusCode } from 'constants/http.enum';
 import { Request, Response } from 'express';
-import { AuthHelper, ResponseHelper } from 'helpers';
-import { AuthService } from 'services/auth.service';
+import { AuthHelper, ResponseHelper } from '../helpers';
+import { AuthService } from '../services/auth.service';
+import { HttpStatusCode } from '../constants/http.enum';
 
 export class AuthController {
   constructor(private authService: AuthService) {

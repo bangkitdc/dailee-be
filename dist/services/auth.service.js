@@ -5,16 +5,18 @@ const tslib_1 = require("tslib");
 const jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = require("bcryptjs");
 const client_1 = require("@prisma/client");
+const user_service_1 = require("./user.service");
 const http_exception_1 = require("../exceptions/http.exception");
 const http_enum_1 = require("../constants/http.enum");
-const auth_helper_1 = require("../helpers/auth.helper");
-const _config_1 = require("../config");
-const user_service_1 = require("./user.service");
-const task_category_service_1 = require("./task.category.service");
+const helpers_1 = require("../helpers");
 const assessment_result_service_1 = require("./assessment.result.service");
+const task_category_service_1 = require("./task.category.service");
+const config_1 = require("../config");
 class AuthService {
-    userService = new user_service_1.UserService();
-    userModel = new client_1.PrismaClient().user;
+    constructor() {
+        this.userService = new user_service_1.UserService();
+        this.userModel = new client_1.PrismaClient().user;
+    }
     async login(res, email, password) {
         const user = await this.userService.getUserByEmail(email);
         // Check user
@@ -28,11 +30,11 @@ class AuthService {
         }
         // User is valid
         // Make refresh token
-        const refreshToken = auth_helper_1.AuthHelper.createRefreshToken(user);
+        const refreshToken = helpers_1.AuthHelper.createRefreshToken(user);
         // Send it to cookie
-        auth_helper_1.AuthHelper.sendRefreshToken(res, refreshToken);
+        helpers_1.AuthHelper.sendRefreshToken(res, refreshToken);
         // Make acess token
-        const accessToken = auth_helper_1.AuthHelper.createAccessToken(user);
+        const accessToken = helpers_1.AuthHelper.createAccessToken(user);
         const assessmentResultService = new assessment_result_service_1.AssessmentResultService();
         return {
             user: {
@@ -79,7 +81,7 @@ class AuthService {
             throw new http_exception_1.HttpException(http_enum_1.HttpStatusCode.Unauthorized, 'Invalid credentials');
         }
         let payload;
-        jsonwebtoken_1.default.verify(refreshToken, _config_1.REFRESH_TOKEN_SECRET, (err, decoded) => {
+        jsonwebtoken_1.default.verify(refreshToken, config_1.REFRESH_TOKEN_SECRET, (err, decoded) => {
             if (err) {
                 throw new http_exception_1.HttpException(http_enum_1.HttpStatusCode.Unauthorized, 'Invalid credentials');
             }
@@ -93,11 +95,11 @@ class AuthService {
             }
             // User is valid
             // Refresh the token
-            const newRefreshToken = auth_helper_1.AuthHelper.createRefreshToken(user);
+            const newRefreshToken = helpers_1.AuthHelper.createRefreshToken(user);
             // Send it to cookie
-            auth_helper_1.AuthHelper.sendRefreshToken(res, newRefreshToken);
+            helpers_1.AuthHelper.sendRefreshToken(res, newRefreshToken);
             // Make acess token
-            const accessToken = auth_helper_1.AuthHelper.createAccessToken(user);
+            const accessToken = helpers_1.AuthHelper.createAccessToken(user);
             return {
                 token: accessToken,
             };

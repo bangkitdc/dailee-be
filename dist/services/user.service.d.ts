@@ -1,5 +1,5 @@
-import { IApiBaseUserSelf } from '../interfaces/user.iterface';
 import { User } from '@prisma/client';
+import { IApiBaseUserSelf } from '../interfaces/user.iterface';
 export declare class UserService {
     private userModel;
     getUserById(user_id: number): Promise<User>;

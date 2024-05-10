@@ -1,9 +1,9 @@
-import { TaskCategoryController } from 'controllers/task.category.controller';
-import { addOrUpdateTaskCategoriesSchema, validateAddTaskCategorySchema } from 'dtos/task.category.dto';
 import { Router } from 'express';
 import { Routes } from 'interfaces/route.interface';
-import { AuthMiddleware, ValidationMiddleware } from 'middlewares';
-import { TaskCategoryService } from 'services/task.category.service';
+import { AuthMiddleware, ValidationMiddleware } from '../middlewares';
+import { TaskCategoryService } from '../services/task.category.service';
+import { TaskCategoryController } from '../controllers/task.category.controller';
+import { addOrUpdateTaskCategoriesSchema, validateAddTaskCategorySchema } from '../dtos/task.category.dto';
 
 export class TaskCategoryRoute implements Routes {
   public router = Router();

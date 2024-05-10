@@ -1,12 +1,10 @@
 import { Response } from 'express';
 import { ZodError } from 'zod';
-
-
-import { HttpException } from 'exceptions/http.exception';
-import { ResponseHelper } from 'helpers';
-import { HttpStatusCode } from 'constants/http.enum';
 import { PrismaClientKnownRequestError, PrismaClientUnknownRequestError } from '@prisma/client/runtime/library';
-import { PrismaErrorForeignKeyConstraint, PrismaErrorUniqueConstraint } from 'interfaces/error.interface';
+import { HttpException } from '../exceptions/http.exception';
+import { ResponseHelper } from '../helpers';
+import { HttpStatusCode } from '../constants/http.enum';
+import { PrismaErrorForeignKeyConstraint, PrismaErrorUniqueConstraint } from '../interfaces/error.interface';
 
 abstract class ErrorMiddleware {
   protected nextHandler?: ErrorMiddleware;

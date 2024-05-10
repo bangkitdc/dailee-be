@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RecommendationService = void 0;
 const client_1 = require("@prisma/client");
 class RecommendationService {
-    prisma = new client_1.PrismaClient();
-    recommendationModel = this.prisma.recommendation;
+    constructor() {
+        this.prisma = new client_1.PrismaClient();
+        this.recommendationModel = this.prisma.recommendation;
+    }
     async getRecommendationByCategoryId(category_id, except_id) {
         let recommendation;
         if (except_id) {

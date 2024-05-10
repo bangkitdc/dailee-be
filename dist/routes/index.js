@@ -8,7 +8,6 @@ const assessment_route_1 = require("./assessment.route");
 const task_category_route_1 = require("./task.category.route");
 const task_route_1 = require("./task.route");
 class AppRouter {
-    router;
     constructor() {
         this.router = (0, express_1.Router)();
         this.router.use(new auth_route_1.AuthRoute().router);

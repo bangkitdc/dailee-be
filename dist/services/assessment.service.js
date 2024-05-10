@@ -1,17 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AssessmentService = void 0;
-const http_enum_1 = require("../constants/http.enum");
-const http_exception_1 = require("../exceptions/http.exception");
 const client_1 = require("@prisma/client");
-const category_service_1 = require("./category.service");
 const assessment_result_service_1 = require("./assessment.result.service");
 const task_category_service_1 = require("./task.category.service");
+const category_service_1 = require("./category.service");
+const http_exception_1 = require("../exceptions/http.exception");
+const http_enum_1 = require("../constants/http.enum");
 class AssessmentService {
-    prisma = new client_1.PrismaClient();
-    assessmentResultModel = this.prisma.assessmentResult;
-    questionModel = this.prisma.question;
-    answerModel = this.prisma.answer;
+    constructor() {
+        this.prisma = new client_1.PrismaClient();
+        this.assessmentResultModel = this.prisma.assessmentResult;
+        this.questionModel = this.prisma.question;
+        this.answerModel = this.prisma.answer;
+    }
     async getAssessmentQuestions(user_id) {
         let questions = [];
         const firstTimeLogin = await this.assessmentResultModel.findFirst({
@@ -74,7 +76,7 @@ class AssessmentService {
                 }
             });
             const currentPoints = totalPoints.get(test.category_id) || 0;
-            totalPoints.set(test.category_id, currentPoints + (ans?.points || 0));
+            totalPoints.set(test.category_id, currentPoints + ((ans === null || ans === void 0 ? void 0 : ans.points) || 0));
         }
         // Create/ Update assessment results
         const assessmentResultService = new assessment_result_service_1.AssessmentResultService();

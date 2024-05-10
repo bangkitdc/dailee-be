@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2017",
     "lib": ["es2017", "esnext.asynciterable"],
     "typeRoots": ["node_modules/@types"],
     "allowSyntheticDefaultImports": true,
@@ -19,20 +19,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "baseUrl": "src",
-    "paths": {
-      // "@config": ["config"],
-      // "@constants/*": ["constants/*"],
-      // "@controllers/*": ["controllers/*"],
-      // "@dtos/*": ["dtos/*"],
-      // "@exceptions/*": ["exceptions/*"],
-      // "@helpers/*": ["helpers/*"],
-      // "@interfaces/*": ["interfaces/*"],
-      // "@middlewares/*": ["middlewares/*"],
-      // "@routes/*": ["routes/*"],
-      // "@services/*": ["services/*"],
-      // "@utils/*": ["utils/*"],
-    }
+    "baseUrl": "src"
   },
   "include": ["src/**/*.ts", "src/**/*.json", ".env"],
   "exclude": ["node_modules"]

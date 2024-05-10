@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AssessmentResultService = void 0;
 const client_1 = require("@prisma/client");
 class AssessmentResultService {
-    assessmentResultModel = new client_1.PrismaClient().assessmentResult;
+    constructor() {
+        this.assessmentResultModel = new client_1.PrismaClient().assessmentResult;
+    }
     async isUserHasTakenTest(user_id) {
         const assessmentResult = await this.assessmentResultModel.findFirst({
             where: {
