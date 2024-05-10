@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskRoute = void 0;
-const task_controller_1 = require("@controllers/task.controller");
-const task_dto_1 = require("@dtos/task.dto");
-const index_1 = require("@middlewares/index");
-const task_service_1 = require("@services/task.service");
+const task_controller_1 = require("../controllers/task.controller");
+const task_dto_1 = require("../dtos/task.dto");
+const index_1 = require("../middlewares/index");
+const task_service_1 = require("../services/task.service");
 const express_1 = require("express");
 class TaskRoute {
+    router = (0, express_1.Router)();
+    taskService = new task_service_1.TaskService();
+    taskController = new task_controller_1.TaskController(this.taskService);
     constructor() {
-        this.router = (0, express_1.Router)();
-        this.taskService = new task_service_1.TaskService();
-        this.taskController = new task_controller_1.TaskController(this.taskService);
         this.initializeRoutes();
     }
     initializeRoutes() {

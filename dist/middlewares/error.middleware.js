@@ -1,11 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const zod_1 = require("zod");
-const http_enum_1 = require("@constants/http.enum");
+const http_enum_1 = require("../constants/http.enum");
 const library_1 = require("@prisma/client/runtime/library");
-const response_helper_1 = require("@helpers/response.helper");
-const http_exception_1 = require("exceptions/http.exception");
+const response_helper_1 = require("../helpers/response.helper");
+const http_exception_1 = require("../exceptions/http.exception");
 class ErrorMiddleware {
+    nextHandler;
     setNextHandler(nextHandler) {
         this.nextHandler = nextHandler;
         return this;

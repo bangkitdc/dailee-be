@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthHelper = void 0;
 const tslib_1 = require("tslib");
-const _config_1 = require("@config");
+const _config_1 = require("../config");
 const jsonwebtoken_1 = tslib_1.__importDefault(require("jsonwebtoken"));
 class AuthHelper {
     static createAccessToken(user) {

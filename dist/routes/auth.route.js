@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthRoute = void 0;
-const auth_controller_1 = require("@controllers/auth.controller");
-const index_1 = require("@middlewares/index");
-const auth_service_1 = require("@services/auth.service");
-const auth_dto_1 = require("dtos/auth.dto");
+const auth_controller_1 = require("../controllers/auth.controller");
+const index_1 = require("../middlewares/index");
+const auth_service_1 = require("../services/auth.service");
+const auth_dto_1 = require("../dtos/auth.dto");
 const express_1 = require("express");
 class AuthRoute {
+    router = (0, express_1.Router)();
+    authService = new auth_service_1.AuthService();
+    authController = new auth_controller_1.AuthController(this.authService);
     constructor() {
-        this.router = (0, express_1.Router)();
-        this.authService = new auth_service_1.AuthService();
-        this.authController = new auth_controller_1.AuthController(this.authService);
         this.initializeRoutes();
     }
     initializeRoutes() {

@@ -2,14 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskService = void 0;
 const client_1 = require("@prisma/client");
-const task_utils_1 = require("@utils/task.utils");
+const task_utils_1 = require("../utils/task.utils");
 const task_category_service_1 = require("./task.category.service");
 const assessment_result_service_1 = require("./assessment.result.service");
 const recommendation_service_1 = require("./recommendation.service");
 class TaskService {
-    constructor() {
-        this.taskModel = new client_1.PrismaClient().task;
-    }
+    taskModel = new client_1.PrismaClient().task;
     async getTaskById(task_id) {
         const task = await this.taskModel.findUnique({
             where: {
@@ -32,8 +30,8 @@ class TaskService {
                 user_id: user_id,
                 task_id: taskData.task_id
             },
-            create: Object.assign({}, newTaskData),
-            update: Object.assign({}, taskData),
+            create: { ...newTaskData },
+            update: { ...taskData },
             select: {
                 task_id: true,
                 task_name: true,

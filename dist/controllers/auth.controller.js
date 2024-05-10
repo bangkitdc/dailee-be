@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
-const http_enum_1 = require("@constants/http.enum");
-const index_1 = require("@helpers/index");
+const http_enum_1 = require("../constants/http.enum");
+const index_1 = require("../helpers/index");
 class AuthController {
+    authService;
     constructor(authService) {
         this.authService = authService;
         this.login = this.login.bind(this);

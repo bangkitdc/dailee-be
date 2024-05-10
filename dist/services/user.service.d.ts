@@ -1,4 +1,4 @@
-import { IApiBaseUserSelf } from '@interfaces/user.iterface';
+import { IApiBaseUserSelf } from '../interfaces/user.iterface';
 import { User } from '@prisma/client';
 export declare class UserService {
     private userModel;

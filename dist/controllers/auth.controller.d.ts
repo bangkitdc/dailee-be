@@ -1,6 +1,6 @@
 /// <reference types="cookie-parser" />
 import { Request, Response } from 'express';
-import { AuthService } from '@services/auth.service';
+import { AuthService } from '../services/auth.service';
 export declare class AuthController {
     private authService;
     constructor(authService: AuthService);

@@ -1,4 +1,4 @@
-import { IApiBaseTaskCategory } from '@interfaces/task.category.interface';
+import { IApiBaseTaskCategory } from '../interfaces/task.category.interface';
 import { TaskCategory } from '@prisma/client';
 export declare class TaskCategoryService {
     private taskCategoryModel;

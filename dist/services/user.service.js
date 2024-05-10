@@ -2,11 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const client_1 = require("@prisma/client");
-const assessment_result_service_1 = require("@services/assessment.result.service");
+const assessment_result_service_1 = require("./assessment.result.service");
 class UserService {
-    constructor() {
-        this.userModel = new client_1.PrismaClient().user;
-    }
+    userModel = new client_1.PrismaClient().user;
     async getUserById(user_id) {
         const user = await this.userModel.findUnique({
             where: {

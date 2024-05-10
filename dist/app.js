@@ -5,9 +5,15 @@ const tslib_1 = require("tslib");
 const express_1 = tslib_1.__importDefault(require("express"));
 const cors_1 = tslib_1.__importDefault(require("cors"));
 const routes_1 = require("./routes");
-const _config_1 = require("@config");
+const _config_1 = require("./config");
 const cookie_parser_1 = tslib_1.__importDefault(require("cookie-parser"));
+if (process.env.NODE_ENV === 'production') {
+    require('module-alias/register');
+}
 class App {
+    app;
+    env;
+    port;
     constructor() {
         this.app = (0, express_1.default)();
         this.env = _config_1.NODE_ENV || 'development';

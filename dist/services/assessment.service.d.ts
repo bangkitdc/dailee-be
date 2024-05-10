@@ -1,5 +1,5 @@
-import { IApiBaseAssessmentTest, IApiBaseQuestion } from '@interfaces/assessment.interface';
-import { IApiBaseTaskCategory } from '@interfaces/task.category.interface';
+import { IApiBaseAssessmentTest, IApiBaseQuestion } from '../interfaces/assessment.interface';
+import { IApiBaseTaskCategory } from '../interfaces/task.category.interface';
 export declare class AssessmentService {
     private prisma;
     private assessmentResultModel;
