@@ -2,17 +2,17 @@
   "name": "dailee-be",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.cjs",
+  "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon",
-    "start": "tsx src/index.ts",
+    "start": "tsx src/server.ts",
     "prisma:init": "prisma init",
     "prisma:migrate": "prisma migrate dev --preview-feature",
     "prisma:generate": "prisma generate",
     "prisma:seed": "ts-node prisma/seed.ts",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "format": "prettier --write src/",
-    "build": "tsc && echo 'Build complete."
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "",
